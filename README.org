@@ -1,0 +1,3 @@
+#+title: Lenia
+
+Implementation of Bert Wang-Chak Chan's [[https://arxiv.org/pdf/1812.05433.pdf][Lenia]], a continuous analogue of Conway's Game of Life.
