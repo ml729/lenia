@@ -28,9 +28,11 @@ from .kernel_cores import KERNEL_CORES
 # end parameters
 
 class DiscreteLenia:
-    def __init__(self, space_res, time_res, state_res,
+    def __init__(self, grid_x, grid_y, space_res, time_res, state_res,
                  kernel_core_name, kernel_peaks, growth_mapping_name,
                  growth_center, growth_width):
+        self.grid_x = grid_x
+        self.grid_y = grid_y
         self.R = space_res
         self.T = time_res
         self.P = state_res
@@ -43,14 +45,14 @@ class DiscreteLenia:
         self.growth_width = growth_width
         self.growth_mapping = GROWTH_MAPPINGS[growth_mapping_name]
 
-        self.B = self.kernel_peaks.shape[0]
+        self.B = self.kernel_peaks.shape[0] - 1
         self.kernel_size = 2*self.R+1
         self.config = self.init_config()
         self.kernel = self.init_kernel()
         self.history = [self.config]
 
     def init_config(self):
-        return
+        return torch.rand(self.grid_x, self.grid_y)
 
     def init_kernel(self):
         x, y = torch.meshgrid(torch.arange(self.kernel_size), torch.arange(self.kernel_size))
